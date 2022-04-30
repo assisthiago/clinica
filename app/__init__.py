@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -15,8 +16,9 @@ def page_internal_server_error(e):
 
 def create_app():
     app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRECT_KEY'] = os.urandom(12).hex()
+    app.config['SECRECT_KEY'] = os.getenv('SECRET_KEY', os.urandom(12).hex())
 
     db.init_app(app)
 
@@ -24,13 +26,27 @@ def create_app():
         db.init_app(app)
         migrate.init_app(app, db)
 
+    login_configuration(app)
     register_blueprints(app)
+
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(500, page_internal_server_error)
 
     return app
 
+def login_configuration(app):
+    from app.resources.user.models import User
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.get_signin'
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
 def register_blueprints(app):
     from app.resources.auth.views import auth_bp
+    from app.resources.client.views import client_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(client_bp)
