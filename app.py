@@ -1,12 +1,18 @@
 import os
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 migrate = Migrate()
+
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+def page_internal_server_error(e):
+    return render_template('500.html'), 404
 
 def create_app(test_config=None):
     app = Flask(__name__)
@@ -25,6 +31,8 @@ def create_app(test_config=None):
 
     # login_config(app)
     register_blueprints(app)
+    app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, page_internal_server_error)
 
     return app
 
