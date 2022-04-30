@@ -24,8 +24,13 @@ def create_app():
         db.init_app(app)
         migrate.init_app(app, db)
 
+    register_blueprints(app)
     app.register_error_handler(404, page_not_found)
     app.register_error_handler(500, page_internal_server_error)
 
     return app
 
+def register_blueprints(app):
+    from app.resources.auth.views import auth_bp
+
+    app.register_blueprint(auth_bp)
