@@ -8,25 +8,18 @@
 	<meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
 	<meta name="author" content="Bootlab">
 
-	<title>Sign Up | AppStack - Admin &amp; Dashboard Template</title>
+	<title>/signup</title>
 
 	<link rel="canonical" href="https://appstack.bootlab.io/pages-sign-up.html" />
 	<link rel="shortcut icon" href="img/favicon.ico">
 
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
-	<!-- Choose your prefered color scheme -->
-	<!-- <link href="css/light.css" rel="stylesheet"> -->
-	<!-- <link href="css/dark.css" rel="stylesheet"> -->
+	<link href="{{ url_for('static', filename='css/light.css') }}" rel="stylesheet">
 
-	<!-- BEGIN SETTINGS -->
-	<!-- Remove this after purchasing -->
-	<link class="js-stylesheet" href="css/light.css" rel="stylesheet">
-	<script src="js/settings.js"></script>
-	<!-- END SETTINGS -->
 </head>
 <!--
-  HOW TO USE: 
+  HOW TO USE:
   data-theme: default (default), dark, light
   data-layout: fluid (default), boxed
   data-sidebar-position: left (default), right
@@ -42,10 +35,8 @@
 						<div class="d-table-cell align-middle">
 
 							<div class="text-center mt-4">
-								<h1 class="h2">Get started</h1>
-								<p class="lead">
-									Start creating the best possible user experience for you customers.
-								</p>
+								<h1 class="h2">Cadastro do auxiliar</h1>
+								<p class="lead">Preencha o formulário abaixo para continuar</p>
 							</div>
 
 							<div class="card">
@@ -53,24 +44,23 @@
 									<div class="m-sm-4">
 										<form>
 											<div class="mb-3">
-												<label class="form-label">Name</label>
-												<input class="form-control form-control-lg" type="text" name="name" placeholder="Enter your name" />
+												<label class="form-label">Usuário</label>
+												<input class="form-control form-control-lg" type="text" name="usuario"
+													placeholder="Entre com o seu usuário" />
 											</div>
 											<div class="mb-3">
-												<label class="form-label">Company</label>
-												<input class="form-control form-control-lg" type="text" name="company" placeholder="Enter your company name" />
+												<label class="form-label">Senha</label>
+												<input class="form-control form-control-lg" type="password"
+													name="senha" placeholder="Entre com uma senha" />
 											</div>
 											<div class="mb-3">
-												<label class="form-label">Email</label>
-												<input class="form-control form-control-lg" type="email" name="email" placeholder="Enter your email" />
-											</div>
-											<div class="mb-3">
-												<label class="form-label">Password</label>
-												<input class="form-control form-control-lg" type="password" name="password" placeholder="Enter password" />
+												<label class="form-label">Confirmar senha</label>
+												<input class="form-control form-control-lg" type="password"
+													name="conf-senha" placeholder="Confirme a senha" />
 											</div>
 											<div class="text-center mt-3">
-												<a href="dashboard-default.html" class="btn btn-lg btn-primary">Sign up</a>
-												<!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+												<button type="submit" class="btn btn-lg btn-primary">Cadastrar</button>
+												<a href="/signin" class="btn btn-lg btn-danger">Cancelar</a>
 											</div>
 										</form>
 									</div>
