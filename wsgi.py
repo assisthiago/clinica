@@ -1,3 +1,3 @@
-from app import app
+from app import db, create_app
 
-app.db.init_app(app=app.create_app())
+db.init_app(app=create_app())
