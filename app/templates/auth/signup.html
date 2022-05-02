@@ -29,6 +29,13 @@
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
 	<div class="main d-flex justify-content-center w-100">
 		<main class="content d-flex p-0">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div>{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
 			<div class="container d-flex flex-column">
 				<div class="row h-100">
 					<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
@@ -42,24 +49,24 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="m-sm-4">
-										<form>
+										<form action="/signup" method="post">
 											<div class="mb-3">
 												<label class="form-label">Usuário</label>
-												<input class="form-control form-control-lg" type="text" name="usuario"
-													placeholder="Entre com o seu usuário" />
+												<input class="form-control form-control-lg" type="text" name="username"
+													placeholder="Entre com o seu usuário" required />
 											</div>
 											<div class="mb-3">
 												<label class="form-label">Senha</label>
 												<input class="form-control form-control-lg" type="password"
-													name="senha" placeholder="Entre com uma senha" />
+													name="password" placeholder="Entre com uma senha" required />
 											</div>
 											<div class="mb-3">
 												<label class="form-label">Confirmar senha</label>
 												<input class="form-control form-control-lg" type="password"
-													name="conf-senha" placeholder="Confirme a senha" />
+													placeholder="Confirme a senha" required />
 											</div>
 											<div class="text-center mt-3">
-												<button type="submit" class="btn btn-lg btn-primary">Cadastrar</button>
+												<input type="submit" class="btn btn-lg btn-primary" value="Cadastrar">
 											</div>
 										</form>
 									</div>
