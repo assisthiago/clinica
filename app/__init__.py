@@ -18,7 +18,8 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRECT_KEY'] = os.getenv('SECRET_KEY', os.urandom(12).hex())
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', os.urandom(12).hex())
+    app.config['SESSION_TYPE'] = 'memcache'
 
     db.init_app(app)
 
@@ -37,7 +38,7 @@ def create_app():
 def login_configuration(app):
     from app.resources.user.models import User
     login_manager = LoginManager()
-    login_manager.login_view = 'auth.get_signin'
+    login_manager.login_view = 'auth.signin'
     login_manager.init_app(app)
 
     @login_manager.user_loader

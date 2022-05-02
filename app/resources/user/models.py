@@ -20,3 +20,17 @@ class User(UserMixin, db.Model):
 
     def __repr__(self) -> str:
         return f'User {self.usuario}'
+
+    @staticmethod
+    def add(user):
+        db.session.add(user)
+        db.session.commit()
+        db.session.close()
+
+    def rollback(user):
+        db.session.rollback()
+        db.session.close()
+
+    @staticmethod
+    def get_by_username(username):
+        return User.query.filter_by(usuario=username).first() or None
