@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -43,6 +43,10 @@ def login_configuration(app):
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
+
+    @login_manager.unauthorized_handler
+    def unauthorized_callback():
+        return redirect('/signin?next=' + request.path)
 
 def register_blueprints(app):
     from app.resources.auth.views import auth_bp
