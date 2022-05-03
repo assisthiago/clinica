@@ -5,5 +5,5 @@ client_bp = Blueprint('client', __name__)
 
 @client_bp.route('/', methods=['GET'])
 @login_required
-def get_clients():
+def list():
     return render_template('index.html')
