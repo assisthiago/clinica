@@ -14,19 +14,28 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 	<link href="{{ url_for('static', filename='css/light.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
 
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-outline alert-dismissible position-fixed" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-icon">
+                    <i class="far fa-fw fa-bell"></i>
+                </div>
+                <div class="alert-message">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 	<div class="main d-flex justify-content-center w-100">
 		<main class="content d-flex p-0">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <div>{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
 			<div class="container d-flex flex-column">
 				<div class="row h-100">
 					<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">

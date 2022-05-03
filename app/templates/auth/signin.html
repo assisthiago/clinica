@@ -13,16 +13,16 @@
     <div class="card">
         <div class="card-body">
             <div class="m-sm-4">
-                <form>
+                <form action="/signin" method="post">
                     <div class="mb-3">
                         <label class="form-label">Usuário</label>
-                        <input class="form-control form-control-lg" type="text" name="usuario"
+                        <input class="form-control form-control-lg" type="text" name="username"
                             placeholder="Entre com o seu usuário" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Senha</label>
                         <input class="form-control form-control-lg" type="password"
-                            name="senha" placeholder="Entre com a sua senha" />
+                            name="password" placeholder="Entre com a sua senha" />
                         <!-- <small>
                             <a href="pages-reset-password.html">Esqueceu a senha?</a>
                         </small> -->
@@ -30,15 +30,14 @@
                     <div>
                         <div class="form-check align-items-center">
                             <input id="rememberme" type="checkbox"
-                                class="form-check-input" value="remember-me" name="remember-me"
+                                class="form-check-input" value="remember" name="remember"
                                 checked>
                             <label class="form-check-label text-small"
                                 for="rememberme">Lembrar de mim</label>
                         </div>
                     </div>
                     <div class="text-center mt-3">
-                        <button type="submit" class="btn btn-lg btn-primary">Entrar</button>
-                        <br>
+                        <input type="submit" class="btn btn-lg btn-primary" value="Entrar">
                     </div>
                 </form>
             </div>

@@ -1,5 +1,13 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from flask_login import login_user
+from flask import (
+    Blueprint,
+    flash,
+    redirect,
+    render_template,
+    request,
+    session,
+    url_for,
+)
+from flask_login import login_required, login_user
 from werkzeug.security import check_password_hash
 
 from app.resources.user.models import User
@@ -15,11 +23,14 @@ def signin():
     user = User.get_by_username(form['username'])
 
     if not user or not check_password_hash(user.senha, form['password']):
-        flash('Usuário ou senha incorreta.', 'danger')
+        flash('Usuário ou senha incorreta', 'danger')
         return redirect(url_for('auth.signin'))
 
     login_user(user, remember=form['remember'])
-    return redirect(url_for('client.list'))
+    session['username'] = user.usuario
+
+    flash(f'Olá, {user.usuario}', 'success')
+    return redirect(url_for('auth.settings'))
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -41,3 +52,22 @@ def signup():
         User.rollback(new_user)
         flash('Ocorreu um erro ao cadastrar o usuário.', 'danger')
         return redirect(url_for('auth.signup'))
+
+@auth_bp.route('/settings', methods=['GET', 'POST'])
+@login_required
+def settings():
+    if request.method == 'GET':
+        context = {'username': session['username']}
+        return render_template('auth/settings.html', context=context)
+
+    form = dict(request.form)
+
+    """
+    Dúvida:
+    - Saber se essa relação de Auxiliar <> Unidade <> Médico será gravada no banco.
+    """
+
+    session['unit'] = form['unit']
+    session['doctor'] = form['doctor']
+
+    return redirect(url_for('client.list'))

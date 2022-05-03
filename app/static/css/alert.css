@@ -1,0 +1,12 @@
+/* Override CSS default */
+.position-fixed {
+    position: fixed;
+    top: 23px;
+    right: 23px;
+    z-index: 9999;
+    border-radius: 0px;
+}
+
+.alert-message {
+    padding-right: 2.85rem;
+}
