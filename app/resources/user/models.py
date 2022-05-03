@@ -1,6 +1,6 @@
-from email.policy import default
 import pendulum
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash
 
 from app import db
 
@@ -16,7 +16,7 @@ class User(UserMixin, db.Model):
 
     def __init__(self, username, password) -> None:
         self.usuario = username
-        self.senha = password
+        self.senha = generate_password_hash(password, method='sha256')
 
     def __repr__(self) -> str:
         return f'User {self.usuario}'
