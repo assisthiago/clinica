@@ -4,36 +4,39 @@
 <div class="d-table-cell align-middle">
 
     <div class="text-center mt-4">
-        <h1 class="h2">Cadastro do auxiliar</h1>
+        <h1 class="h2">Configuração</h1>
         <p class="lead">Preencha o formulário abaixo para continuar</p>
     </div>
 
     <div class="card">
         <div class="card-body">
             <div class="m-sm-4">
-                <form action="/signup" method="post">
+                <form action="/settings" method="post">
                     <div class="mb-3">
-                        <label class="form-label">Usuário</label>
-                        <input class="form-control form-control-lg" type="text" name="username"
-                            placeholder="Entre com o seu usuário" required />
+                        <label class="form-label">Unidade</label>
+                        <select class="form-control mb-3" name="unit" required>
+                            <option value="">Selecione uma unidade</option>
+                            <option value="One">One</option>
+                            <option value="Two">Two</option>
+                            <option value="Three">Three</option>
+                        </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Senha</label>
-                        <input class="form-control form-control-lg" type="password"
-                            name="password" placeholder="Entre com uma senha" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Confirmar senha</label>
-                        <input class="form-control form-control-lg" type="password"
-                            placeholder="Confirme a senha" required />
+                        <label class="form-label">Médico</label>
+                        <select class="form-control mb-3" name="doctor" required>
+                            <option value="">Selecione um médico</option>
+                            <option value="One">One</option>
+                            <option value="Two">Two</option>
+                            <option value="Three">Three</option>
+                        </select>
                     </div>
                     <div class="text-center mt-3">
-                        <input type="submit" class="btn btn-lg btn-primary" value="Cadastrar">
+                        <input type="submit" class="btn btn-lg btn-primary" value="Confirmar">
                     </div>
                 </form>
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="/signin" class="btn btn-lg btn-link">Voltar</a>
+                <a href="/signout" class="btn btn-lg btn-link">Sair</a>
             </div>
         </div>
     </div>
