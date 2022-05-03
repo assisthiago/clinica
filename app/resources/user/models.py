@@ -12,7 +12,7 @@ class User(UserMixin, db.Model):
     senha = db.Column(db.String(100))
     status = db.Column(db.String(100), default='ativo')
     criado_em = db.Column(db.DateTime(), default=pendulum.now(tz='America/Sao_Paulo'))
-    atualizado_em = db.Column(db.DateTime(), default=pendulum.now(tz='America/Sao_Paulo'))
+    atualizado_em = db.Column(db.DateTime(), default=pendulum.now(tz='America/Sao_Paulo'), onupdate=pendulum.now(tz='America/Sao_Paulo'))
 
     def __init__(self, username, password) -> None:
         self.usuario = username

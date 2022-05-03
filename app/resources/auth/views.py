@@ -7,7 +7,7 @@ from flask import (
     session,
     url_for,
 )
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user
 from werkzeug.security import check_password_hash
 
 from app.resources.user.models import User
@@ -45,20 +45,36 @@ def signup():
     new_user = User(**form)
     try:
         User.add(new_user)
-        flash('Usuário cadastrado com sucesso.', 'success')
+        flash('Usuário cadastrado com sucesso', 'success')
         return redirect(url_for('auth.signin'))
 
     except:
         User.rollback(new_user)
-        flash('Ocorreu um erro ao cadastrar o usuário.', 'danger')
+        flash('Ocorreu um erro ao cadastrar o usuário', 'danger')
         return redirect(url_for('auth.signup'))
+
+@auth_bp.route('/signout', methods=['GET'])
+@login_required
+def signout():
+    logout_user()
+    session.clear()
+
+    return redirect(url_for('auth.signin'))
 
 @auth_bp.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
     if request.method == 'GET':
-        context = {'username': session['username']}
-        return render_template('auth/settings.html', context=context)
+        try:
+            context = {'username': session['username']}
+            return render_template('auth/settings.html', context=context)
+
+        except:
+            logout_user()
+            session.clear()
+
+            flash('Ocorreu um erro na configuração', 'danger')
+            return redirect(url_for('auth.signin'))
 
     form = dict(request.form)
 
