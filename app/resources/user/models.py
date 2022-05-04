@@ -27,6 +27,14 @@ class User(UserMixin, db.Model):
         db.session.commit()
         db.session.close()
 
+    @staticmethod
+    def update(user, form):
+        user.usuario = form['username']
+        user.status = 'ativo' if 'status' in form.keys() else 'inativo'
+
+        db.session.commit()
+        db.session.close()
+
     def rollback(user):
         db.session.rollback()
         db.session.close()
