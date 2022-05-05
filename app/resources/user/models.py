@@ -6,11 +6,15 @@ from app import db
 
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'Auxiliar'
+    __tablename__ = 'Equipe'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     usuario = db.Column(db.String(100), unique=True)
     senha = db.Column(db.String(100))
     status = db.Column(db.String(100), default='ativo')
+    nome = db.Column(db.String(100))
+    sobrenome = db.Column(db.String(100))
+    cargo = db.Column(db.String(100))
+    crm = db.Column(db.String(100))
     criado_em = db.Column(db.DateTime(), default=pendulum.now(tz='America/Sao_Paulo'))
     atualizado_em = db.Column(db.DateTime(), default=pendulum.now(tz='America/Sao_Paulo'), onupdate=pendulum.now(tz='America/Sao_Paulo'))
 
@@ -28,10 +32,7 @@ class User(UserMixin, db.Model):
         db.session.close()
 
     @staticmethod
-    def update(user, form):
-        user.usuario = form['username']
-        user.status = 'ativo' if 'status' in form.keys() else 'inativo'
-
+    def update():
         db.session.commit()
         db.session.close()
 

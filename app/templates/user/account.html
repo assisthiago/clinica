@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container-fluid p-0">
 
-    <h1 class="h3 mb-3">Auxiliar</h1>
+    <h1 class="h3 mb-3">Equipe</h1>
 
     <div class="row">
         <div class="col-md-3 col-xl-2">
@@ -32,17 +32,6 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-actions float-end">
-                                <div class="dropdown position-relative">
-                                    <a href="#" data-bs-toggle="dropdown" data-bs-display="static">
-                                        <i class="align-middle" data-feather="more-horizontal"></i>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" href="#">Deletar a conta</a>
-                                    </div>
-                                </div>
-                            </div>
                             <h5 class="card-title mb-0">Conta</h5>
                         </div>
                         <div class="card-body">
@@ -79,28 +68,30 @@
                             <h5 class="card-title mb-0">Informações</h5>
                         </div>
                         <div class="card-body">
-                            <form method="/user/info">
+                            <form method="/user/info" method="post">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="first_name" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="first_name" value=""
+                                        <input type="text" class="form-control" id="first_name" value="{{ context.user.nome }}"
                                             placeholder="Nome">
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="last_name" class="form-label">Sobrenome</label>
-                                        <input type="text" class="form-control" id="last_name" value=""
+                                        <input type="text" class="form-control" id="last_name" value="{{ context.user.sobrenome }}"
                                             placeholder="Sobrenome">
                                     </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">E-mail</label>
-                                    <input type="email" class="form-control" id="email"
-                                        placeholder="E-mail">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="telefone" class="form-label">Telefone</label>
-                                    <input type="text" class="form-control" id="telefone"
-                                        placeholder="21999999999">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="first_name" class="form-label">Cargo</label>
+                                        <input type="text" class="form-control" id="first_name" value="{{ context.user.cargo }}"
+                                            placeholder="Nome">
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="last_name" class="form-label">CRM</label>
+                                        <input type="text" class="form-control" id="last_name" value="{{ context.user.crm }}"
+                                            placeholder="Sobrenome">
+                                    </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Atualizar">
                             </form>
