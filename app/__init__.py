@@ -16,7 +16,7 @@ def page_internal_server_error(e):
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI', None)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', None)
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', os.urandom(12).hex())
     app.config['SESSION_TYPE'] = 'memcache'
