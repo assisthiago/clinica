@@ -53,7 +53,7 @@ def login_configuration(app):
 
     @login_manager.unauthorized_handler
     def unauthorized_callback():
-        return redirect('/signin?next=' + request.path)
+        return redirect('/signin')
 
 def register_blueprints(app):
     from app.resources.auth.views import auth_bp
