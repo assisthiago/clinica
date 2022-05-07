@@ -117,20 +117,19 @@
                         <div class="card-body">
                             <h5 class="card-title">Senha</h5>
 
-                            <form method="/user/password" method="POST">
+                            <form action="/user/password" method="post">
                                 <div class="mb-3">
-                                    <label for="inputPasswordCurrent" class="form-label">Senha atual</label>
-                                    <input type="password" class="form-control"
-                                        id="inputPasswordCurrent">
+                                    <label for="password" class="form-label">Senha atual</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
                                     <!-- <small><a href="#">Forgot your password?</a></small> -->
                                 </div>
                                 <div class="mb-3">
-                                    <label for="inputPasswordNew" class="form-label">Nova senha</label>
-                                    <input type="password" class="form-control" id="inputPasswordNew">
+                                    <label for="new_password" class="form-label">Nova senha</label>
+                                    <input type="password" class="form-control" id="new_password" name="new_password" required>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="inputPasswordNew2" class="form-label">Confirmar nova senha</label>
-                                    <input type="password" class="form-control" id="inputPasswordNew2">
+                                    <label for="confirm_password" class="form-label">Confirmar nova senha</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Atualizar">
                             </form>
