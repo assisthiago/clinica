@@ -16,7 +16,13 @@ def page_internal_server_error(e):
 
 def create_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', None)
+
+    # SQLAlchemy 1.4 and Heroku setup
+    database_uri = os.getenv("DATABASE_URL")
+    if database_uri.startswith("postgres://"):
+        database_uri = database_uri.replace("postgres://", "postgresql://", 1)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', os.urandom(12).hex())
     app.config['SESSION_TYPE'] = 'memcache'
