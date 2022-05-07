@@ -22,8 +22,8 @@
                 <a class="dropdown-item" href="{{ url_for('user.account') }}"><i class="align-middle me-1" data-feather="user"></i>
                     Conta</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/user/settings">Configuração</a>
-                <a class="dropdown-item" href="/signout">Sair</a>
+                <a class="dropdown-item" href="{{ url_for('auth.settings') }}">Configuração</a>
+                <a class="dropdown-item" href="{{ url_for('auth.signout') }}">Sair</a>
             </div>
         </li>
     </ul>
