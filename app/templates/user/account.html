@@ -68,29 +68,41 @@
                             <h5 class="card-title mb-0">Informações</h5>
                         </div>
                         <div class="card-body">
-                            <form method="/user/info" method="post">
+                            <form action="/user/info" method="post">
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
                                         <label for="first_name" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="first_name" value="{{ context.user.nome }}"
-                                            placeholder="Nome">
+                                        {% if context.user.nome %}
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ context.user.nome }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Preencha seu nome">
+                                        {% endif %}
                                     </div>
                                     <div class="mb-3 col-md-6">
                                         <label for="last_name" class="form-label">Sobrenome</label>
-                                        <input type="text" class="form-control" id="last_name" value="{{ context.user.sobrenome }}"
-                                            placeholder="Sobrenome">
+                                        {% if context.user.sobrenome %}
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ context.user.sobrenome }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Preencha seu sobrenome">
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label for="first_name" class="form-label">Cargo</label>
-                                        <input type="text" class="form-control" id="first_name" value="{{ context.user.cargo }}"
-                                            placeholder="Nome">
+                                        <label for="responsibility" class="form-label">Cargo</label>
+                                        {% if context.user.cargo %}
+                                        <input type="text" class="form-control" id="responsibility" name="responsibility" value="{{ context.user.cargo }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="responsibility" name="responsibility" placeholder="Preencha seu cargo">
+                                        {% endif %}
                                     </div>
                                     <div class="mb-3 col-md-6">
-                                        <label for="last_name" class="form-label">CRM</label>
-                                        <input type="text" class="form-control" id="last_name" value="{{ context.user.crm }}"
-                                            placeholder="Sobrenome">
+                                        <label for="crm" class="form-label">CRM</label>
+                                        {% if context.user.crm %}
+                                        <input type="text" class="form-control" id="crm" name="crm" value="{{ context.user.crm }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="crm" name="crm" placeholder="Preencha seu CRM">
+                                        {% endif %}
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary" value="Atualizar">

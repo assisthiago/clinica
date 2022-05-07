@@ -26,9 +26,9 @@ def signin():
         flash('Usuário ou senha incorreta', 'danger')
         return redirect(url_for('auth.signin'))
 
-    if user.status == 'inativo':
-        flash('Usuário indisponível', 'danger')
-        return redirect(url_for('auth.signin'))
+    # if user.status == 'inativo':
+    #     flash('Usuário indisponível', 'danger')
+    #     return redirect(url_for('auth.signin'))
 
     login_user(user, remember=form['remember'])
     session['username'] = user.usuario

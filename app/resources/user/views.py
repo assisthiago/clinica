@@ -15,12 +15,6 @@ def account():
         return render_template('user/account.html', context=context)
 
     form = dict(request.form)
-
-    if User.get_by_username(form['username']):
-        flash('Usuário já existente', 'danger')
-        return render_template('user/account.html', context=context)
-
-
     user.usuario = form['username']
     user.status = 'ativo' if 'status' in form.keys() else 'inativo'
 
@@ -44,10 +38,10 @@ def info():
     user = User.get_by_username(session['username'])
 
     form = dict(request.form)
-    user.nome = form['name']
-    user.sobrenome = form['last_name']
-    user.cargo = form['responsability']
-    user.crm = form['crm']
+    user.nome = form['first_name'] or None
+    user.sobrenome = form['last_name'] or None
+    user.cargo = form['responsibility'] or None
+    user.crm = form['crm'] or None
 
     try:
         User.update()
