@@ -1,0 +1,50 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+<div class="d-table-cell align-middle">
+
+    <div class="text-center mt-4">
+        <h1 class="h2">Configuração</h1>
+        <p class="lead">Preencha o formulário abaixo para continuar</p>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="m-sm-4">
+                <form action="/settings" method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Unidade</label>
+                        <select class="form-control mb-3" name="unit_id" required>
+                            <option value="">Selecione uma unidade</option>
+                            {% for unit_id, unit in context.units %}
+                                {% if unit_id == context.unit_id %}
+                                <option value="{{ unit_id }}" selected>{{ unit }}</option>
+                                {% else %}
+                                <option value="{{ unit_id }}">{{ unit }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Médico</label>
+                        <select class="form-control mb-3" name="doctor_id" required>
+                            <option value="">Selecione um médico</option>
+                            {% for doctor_id, doctor in context.doctors %}
+                                {% if doctor_id == context.doctor_id %}
+                                <option value="{{ doctor_id }}" selected>{{ doctor }}</option>
+                                {% else %}
+                                <option value="{{ doctor_id }}">{{ doctor }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="text-center mt-3">
+                        <input type="submit" class="btn btn-lg btn-primary" value="Confirmar">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

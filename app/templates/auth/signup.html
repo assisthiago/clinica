@@ -1,83 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'auth/base.html' %}
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="Responsive Bootstrap 5 Admin &amp; Dashboard Template">
-	<meta name="author" content="Bootlab">
+{% block content %}
+<div class="d-table-cell align-middle">
 
-	<title>/signup</title>
+    <div class="text-center mt-4">
+        <h1 class="h2">Cadastro do auxiliar</h1>
+        <p class="lead">Preencha o formulário abaixo para continuar</p>
+    </div>
 
-	<link rel="canonical" href="https://appstack.bootlab.io/pages-sign-up.html" />
-	<link rel="shortcut icon" href="img/favicon.ico">
+    <div class="card">
+        <div class="card-body">
+            <div class="m-sm-4">
+                <form action="/signup" method="post" id="signup">
+                    <div class="mb-3">
+                        <label class="form-label">Usuário</label>
+                        <input class="form-control form-control-lg" type="text" name="username" id="username"
+                            placeholder="Entre com o seu usuário" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Senha</label>
+                        <input class="form-control form-control-lg" type="password" id="password"
+                            name="password" placeholder="Entre com uma senha" required />
+                        <label id="validation-password-error" class="error jquery-validation-error small form-text invalid-feedback" for="password">
+                            Por favor, entre com uma senha com no mínimo 8 caracteres.
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmar senha</label>
+                        <input class="form-control form-control-lg" type="password" id="confirm-password"
+                            placeholder="Confirme a senha" required />
+                        <label id="validation-password-error" class="error jquery-validation-error small form-text invalid-feedback" for="confirm-password">
+                            Por favor, entre com a mesma senha.
+                        </label>
+                    </div>
+                    <div class="text-center mt-3">
+                        <input type="submit" class="btn btn-lg btn-primary" value="Cadastrar">
+                    </div>
+                </form>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="/signin" class="btn btn-lg btn-link">Voltar</a>
+            </div>
+        </div>
+    </div>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
-
-	<link href="{{ url_for('static', filename='css/light.css') }}" rel="stylesheet">
-
-</head>
-<!--
-  HOW TO USE:
-  data-theme: default (default), dark, light
-  data-layout: fluid (default), boxed
-  data-sidebar-position: left (default), right
-  data-sidebar-behavior: sticky (default), fixed, compact
--->
-
-<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
-	<div class="main d-flex justify-content-center w-100">
-		<main class="content d-flex p-0">
-			<div class="container d-flex flex-column">
-				<div class="row h-100">
-					<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
-						<div class="d-table-cell align-middle">
-
-							<div class="text-center mt-4">
-								<h1 class="h2">Cadastro do auxiliar</h1>
-								<p class="lead">Preencha o formulário abaixo para continuar</p>
-							</div>
-
-							<div class="card">
-								<div class="card-body">
-									<div class="m-sm-4">
-										<form>
-											<div class="mb-3">
-												<label class="form-label">Usuário</label>
-												<input class="form-control form-control-lg" type="text" name="usuario"
-													placeholder="Entre com o seu usuário" />
-											</div>
-											<div class="mb-3">
-												<label class="form-label">Senha</label>
-												<input class="form-control form-control-lg" type="password"
-													name="senha" placeholder="Entre com uma senha" />
-											</div>
-											<div class="mb-3">
-												<label class="form-label">Confirmar senha</label>
-												<input class="form-control form-control-lg" type="password"
-													name="conf-senha" placeholder="Confirme a senha" />
-											</div>
-											<div class="text-center mt-3">
-												<button type="submit" class="btn btn-lg btn-primary">Cadastrar</button>
-											</div>
-										</form>
-									</div>
-									<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-										<a href="/signin" class="btn btn-lg btn-link">Voltar</a>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
-
-	<script src="js/app.js"></script>
-
-</body>
-
-</html>
+    <script src="{{ url_for('static', filename='js/auth/validation.js') }}"></script>
+</div>
+{% endblock %}
