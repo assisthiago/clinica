@@ -14,29 +14,34 @@
                 <form action="/settings" method="post">
                     <div class="mb-3">
                         <label class="form-label">Unidade</label>
-                        <select class="form-control mb-3" name="unit" required>
+                        <select class="form-control mb-3" name="unit_id" required>
                             <option value="">Selecione uma unidade</option>
-                            <option value="One">One</option>
-                            <option value="Two">Two</option>
-                            <option value="Three">Three</option>
+                            {% for unit_id, unit in context.units %}
+                                {% if unit_id == context.unit_id %}
+                                <option value="{{ unit_id }}" selected>{{ unit }}</option>
+                                {% else %}
+                                <option value="{{ unit_id }}">{{ unit }}</option>
+                                {% endif %}
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Médico</label>
-                        <select class="form-control mb-3" name="doctor" required>
+                        <select class="form-control mb-3" name="doctor_id" required>
                             <option value="">Selecione um médico</option>
-                            <option value="One">One</option>
-                            <option value="Two">Two</option>
-                            <option value="Three">Three</option>
+                            {% for doctor_id, doctor in context.doctors %}
+                                {% if doctor_id == context.doctor_id %}
+                                <option value="{{ doctor_id }}" selected>{{ doctor }}</option>
+                                {% else %}
+                                <option value="{{ doctor_id }}">{{ doctor }}</option>
+                                {% endif %}
+                            {% endfor %}
                         </select>
                     </div>
                     <div class="text-center mt-3">
                         <input type="submit" class="btn btn-lg btn-primary" value="Confirmar">
                     </div>
                 </form>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <a href="/signout" class="btn btn-lg btn-link">Sair</a>
             </div>
         </div>
     </div>

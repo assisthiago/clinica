@@ -26,6 +26,10 @@ def signin():
         flash('Usuário ou senha incorreta', 'danger')
         return redirect(url_for('auth.signin'))
 
+    # if user.status == 'inativo':
+    #     flash('Usuário indisponível', 'danger')
+    #     return redirect(url_for('auth.signin'))
+
     login_user(user, remember=form['remember'])
     session['username'] = user.usuario
 
@@ -65,8 +69,27 @@ def signout():
 @login_required
 def settings():
     if request.method == 'GET':
+        units = [
+            ('unit_1', 'Unidade 1'),
+            ('unit_2', 'Unidade 2'),
+            ('unit_3', 'Unidade 3')
+        ]
+        doctors = [
+            ('doctor_1', 'José Maria'),
+            ('doctor_2', 'Agostinho'),
+            ('doctor_3', 'Bento')
+        ]
+
         try:
-            context = {'username': session['username']}
+            unit_id, doctor_id = None, None
+            if 'doctor_unit' in session.keys():
+                unit_id, doctor_id = session['doctor_unit']
+
+            context = {
+                'username': session['username'],
+                'unit_id': unit_id, 'doctor_id': doctor_id,
+                'units': units, 'doctors': doctors
+            }
             return render_template('auth/settings.html', context=context)
 
         except:
@@ -83,7 +106,5 @@ def settings():
     - Saber se essa relação de Auxiliar <> Unidade <> Médico será gravada no banco.
     """
 
-    session['unit'] = form['unit']
-    session['doctor'] = form['doctor']
-
+    session['doctor_unit'] = form['unit_id'], form['doctor_id']
     return redirect(url_for('client.list'))

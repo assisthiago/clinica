@@ -1,0 +1,145 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container-fluid p-0">
+
+    <h1 class="h3 mb-3">Equipe</h1>
+
+    <div class="row">
+        <div class="col-md-3 col-xl-2">
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Perfil</h5>
+                </div>
+
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list"
+                        href="#account" role="tab">
+                        Conta
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list"
+                        href="#password" role="tab">
+                        Senha
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-xl-10">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Conta</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="/user/account" method="post">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="mb-3">
+                                            <label for="username"
+                                                class="form-label">Usuário</label>
+                                            <input type="text" class="form-control" name="username" id="username" value="{{ context.user.usuario }}"
+                                                placeholder="Usuário" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <div class="form-check form-switch">
+                                                {% if context.user.status == 'ativo' %}
+                                                    <input class="form-check-input" type="checkbox" name="status" id="status" checked >
+                                                {% else %}
+                                                    <input class="form-check-input" type="checkbox" name="status" id="status">
+                                                {% endif %}
+                                                <label class="form-check-label" for="status">Ativo</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="submit" class="btn btn-primary" value="Atualizar">
+                            </form>
+
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Informações</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="/user/info" method="post">
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="first_name" class="form-label">Nome</label>
+                                        {% if context.user.nome %}
+                                        <input type="text" class="form-control" id="first_name" name="first_name" value="{{ context.user.nome }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Preencha seu nome">
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="last_name" class="form-label">Sobrenome</label>
+                                        {% if context.user.sobrenome %}
+                                        <input type="text" class="form-control" id="last_name" name="last_name" value="{{ context.user.sobrenome }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Preencha seu sobrenome">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="responsibility" class="form-label">Cargo</label>
+                                        {% if context.user.cargo %}
+                                        <input type="text" class="form-control" id="responsibility" name="responsibility" value="{{ context.user.cargo }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="responsibility" name="responsibility" placeholder="Preencha seu cargo">
+                                        {% endif %}
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="crm" class="form-label">CRM</label>
+                                        {% if context.user.crm %}
+                                        <input type="text" class="form-control" id="crm" name="crm" value="{{ context.user.crm }}">
+                                        {% else %}
+                                        <input type="text" class="form-control" id="crm" name="crm" placeholder="Preencha seu CRM">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Atualizar">
+                            </form>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="password" role="tabpanel">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Senha</h5>
+
+                            <form action="/user/password" method="post">
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha atual</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                    <!-- <small><a href="#">Forgot your password?</a></small> -->
+                                </div>
+                                <div class="mb-3">
+                                    <label for="new_password" class="form-label">Nova senha</label>
+                                    <input type="password" class="form-control" id="new_password" name="new_password" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirm_password" class="form-label">Confirmar nova senha</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Atualizar">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

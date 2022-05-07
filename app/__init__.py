@@ -52,6 +52,8 @@ def login_configuration(app):
 def register_blueprints(app):
     from app.resources.auth.views import auth_bp
     from app.resources.client.views import client_bp
+    from app.resources.user.views import user_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(client_bp)
+    app.register_blueprint(user_bp, url_prefix='/user')

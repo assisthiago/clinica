@@ -15,10 +15,24 @@
 
     <link href="{{ url_for('static', filename='css/light.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/alert.css') }}" rel="stylesheet">
-
 </head>
 
 <body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-outline alert-dismissible position-fixed" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-icon">
+                    <i class="far fa-fw fa-bell"></i>
+                </div>
+                <div class="alert-message">
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div class="wrapper">
         <nav id="sidebar" class="sidebar">
             {% include '_partials/sidebar.html' %}
@@ -35,8 +49,8 @@
         </div>
     </div>
 
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-
 </body>
 
 </html>
