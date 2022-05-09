@@ -14,29 +14,36 @@
                 <form action="/settings" method="post">
                     <div class="mb-3">
                         <label class="form-label">Unidade</label>
-                        <select class="form-control mb-3" name="unit_id" required>
+                        <select class="form-control mb-3" name="unit_id" id="unit" required>
                             <option value="">Selecione uma unidade</option>
                             {% for unit_id, unit in context.units %}
-                                {% if unit_id == context.unit_id %}
-                                <option value="{{ unit_id }}" selected>{{ unit }}</option>
-                                {% else %}
-                                <option value="{{ unit_id }}">{{ unit }}</option>
-                                {% endif %}
+                                <option value="{{ unit_id }}" data-target="{{ unit_id }}">{{ unit }}</option>
                             {% endfor %}
                         </select>
                     </div>
+
+                    <!--  -->
+
                     <div class="mb-3">
-                        <label class="form-label">Médico</label>
-                        <select class="form-control mb-3" name="doctor_id" required>
-                            <option value="">Selecione um médico</option>
-                            {% for doctor_id, doctor in context.doctors %}
-                                {% if doctor_id == context.doctor_id %}
-                                <option value="{{ doctor_id }}" selected>{{ doctor }}</option>
-                                {% else %}
-                                <option value="{{ doctor_id }}">{{ doctor }}</option>
-                                {% endif %}
-                            {% endfor %}
-                        </select>
+                        <div id="input-placeholder">
+                            <label class="form-label">Médico</label>
+                            <select class="form-control mb-3" name="doctor_id" disabled>
+                                <option id="default" value="">Selecione um médico</option>
+                            </select>
+                        </div>
+
+                        {% for unit_id, doctors in context.doctors %}
+                            <div id="{{ unit_id }}" class="unit-selects d-none">
+                                <label class="form-label">Médico</label>
+                                <select class="form-control mb-3 doctor" name="doctor-{{ unit_id }}" id="{{ unit_id }}">
+                                    <option id="default" value="">Selecione um médico</option>
+                                    {% for doctor in doctors %}
+                                        <option class="{{ unit_id }}" value="{{ doctor }}">{{ doctor }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        {% endfor %}
+
                     </div>
                     <div class="text-center mt-3">
                         <input type="submit" class="btn btn-lg btn-primary" value="Confirmar">
@@ -46,5 +53,6 @@
         </div>
     </div>
 
+    <script src="{{ url_for('static', filename='js/settings/validation.js') }}"></script>
 </div>
 {% endblock %}

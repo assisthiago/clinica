@@ -68,27 +68,23 @@ def signout():
 @auth_bp.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
+    units = [
+        ('unit_1', 'Unidade 1'),
+        ('unit_2', 'Unidade 2'),
+        ('unit_3', 'Unidade 3')
+    ]
+    doctors = [
+        ('unit_1', ['Agostinho', 'Bento']),
+        ('unit_2', ['José Maria', 'Bento']),
+        ('unit_3', ['José Maria', 'Agostinho'])
+    ]
+
     if request.method == 'GET':
-        units = [
-            ('unit_1', 'Unidade 1'),
-            ('unit_2', 'Unidade 2'),
-            ('unit_3', 'Unidade 3')
-        ]
-        doctors = [
-            ('doctor_1', 'José Maria'),
-            ('doctor_2', 'Agostinho'),
-            ('doctor_3', 'Bento')
-        ]
-
         try:
-            unit_id, doctor_id = None, None
-            if 'doctor_unit' in session.keys():
-                unit_id, doctor_id = session['doctor_unit']
-
             context = {
                 'username': session['username'],
-                'unit_id': unit_id, 'doctor_id': doctor_id,
-                'units': units, 'doctors': doctors
+                'units': units,
+                'doctors': doctors,
             }
             return render_template('auth/settings.html', context=context)
 
@@ -100,11 +96,25 @@ def settings():
             return redirect(url_for('auth.signin'))
 
     form = dict(request.form)
+    unit_id = form.pop('unit_id')
+    for key in form:
+        if form[key]:
+            session['doctor'] = form[key]
+            break
 
-    """
-    Dúvida:
-    - Saber se essa relação de Auxiliar <> Unidade <> Médico será gravada no banco.
-    """
+    for _id, name in units:
+        if unit_id == _id:
+            session['unit'] = name
 
-    session['doctor_unit'] = form['unit_id'], form['doctor_id']
+    for _id, _list in doctors:
+        if unit_id == _id:
+            session['doctors'] = _list
+
+    return redirect(url_for('client.list'))
+
+@auth_bp.route('/change-doctor', methods=['POST'])
+@login_required
+def change_doctor():
+    form = dict(request.form)
+    session['doctor'] = form['doctor']
     return redirect(url_for('client.list'))
