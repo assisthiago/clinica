@@ -75,15 +75,15 @@ def settings():
             ('unit_3', 'Unidade 3')
         ]
         doctors = [
-            ('doctor_1', 'José Maria'),
-            ('doctor_2', 'Agostinho'),
-            ('doctor_3', 'Bento')
+            ('unit_1', ['Agostinho', 'Bento']),
+            ('unit_2', ['José Maria', 'Bento']),
+            ('unit_3', ['José Maria', 'Agostinho'])
         ]
 
         try:
             unit_id, doctor_id = None, None
-            if 'doctor_unit' in session.keys():
-                unit_id, doctor_id = session['doctor_unit']
+            if 'unit_doctor' in session.keys():
+                unit_id, doctor_id = session['unit_doctor']
 
             context = {
                 'username': session['username'],
@@ -106,5 +106,5 @@ def settings():
     - Saber se essa relação de Auxiliar <> Unidade <> Médico será gravada no banco.
     """
 
-    session['doctor_unit'] = form['unit_id'], form['doctor_id']
+    session['unit_docter'] = form['unit_id'], form['doctor_id']
     return redirect(url_for('client.list'))
