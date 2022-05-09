@@ -111,3 +111,10 @@ def settings():
             session['doctors'] = _list
 
     return redirect(url_for('client.list'))
+
+@auth_bp.route('/change-doctor', methods=['POST'])
+@login_required
+def change_doctor():
+    form = dict(request.form)
+    session['doctor'] = form['doctor']
+    return redirect(url_for('client.list'))

@@ -17,11 +17,7 @@
                         <select class="form-control mb-3" name="unit_id" id="unit" required>
                             <option value="">Selecione uma unidade</option>
                             {% for unit_id, unit in context.units %}
-                                {% if '' %}
-                                <option value="{{ unit_id }}" data-target="{{ unit_id }}" selected>{{ unit }}</option>
-                                {% else %}
                                 <option value="{{ unit_id }}" data-target="{{ unit_id }}">{{ unit }}</option>
-                                {% endif %}
                             {% endfor %}
                         </select>
                     </div>
@@ -42,11 +38,7 @@
                                 <select class="form-control mb-3 doctor" name="doctor-{{ unit_id }}" id="{{ unit_id }}">
                                     <option id="default" value="">Selecione um médico</option>
                                     {% for doctor in doctors %}
-                                        {% if '' %}
-                                        <option class="{{ unit_id }}" value="{{ doctor }}" selected>{{ doctor }}</option>
-                                        {% else %}
                                         <option class="{{ unit_id }}" value="{{ doctor }}">{{ doctor }}</option>
-                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
