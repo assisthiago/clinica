@@ -4,19 +4,17 @@ $(document).ready(() => {
     $('#confirm-password').bind('change paste keyup', (e) => compare_passwords(e));
 
     function enable_doctor_select(e) {
-        const $input = $(`#${e.currentTarget.id}`);
-        const option = $input.val().trim();
-
-        if (option != '') {
+        const option = $(`#${e.currentTarget.id} option:selected`).data('target');
+        if (option) {
             $('div#input-placeholder').addClass('d-none');
             $('div.unit-selects').addClass('d-none');
 
-            const $target = $(`div#${option}`);
-            $target.removeClass('d-none');
+            $('select.doctor').attr('required', false);
+            $(`select#${option}`).attr('required', true);
+            $(`div#${option}`).removeClass('d-none');
+            return;
         }
-        else {
-            $('div#input-placeholder').removeClass('d-none');
-            $('div.unit-selects').addClass('d-none');
-        }
+        $('div#input-placeholder').removeClass('d-none');
+        $('div.unit-selects').addClass('d-none');
     };
 });
